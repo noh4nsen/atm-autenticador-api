@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Atm.Autenticador.Dados.Extensions.Tables;
+using Microsoft.EntityFrameworkCore;
 
 namespace Atm.Autenticador.Dados.Extensions.Facades
 {
@@ -6,6 +7,7 @@ namespace Atm.Autenticador.Dados.Extensions.Facades
     {
         internal static void Setuptables(this ModelBuilder modelBuilder)
         {
+            modelBuilder.SetupUsuario();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Atm.Autenticador.Dados.Extensions
     {
         internal static void SetupRepositories(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepository<Usuario>), typeof(Repository<Usuario>));
         }
 
         internal static void SetupDbContext(this IServiceCollection services, string connectionString)
