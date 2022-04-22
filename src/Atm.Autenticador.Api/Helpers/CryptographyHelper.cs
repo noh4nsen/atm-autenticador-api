@@ -28,12 +28,13 @@ namespace Atm.Autenticador.Api.Helpers
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor()
             {
+                Issuer = "Marvin-Autenticador",
+                Audience = "Marvin",
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, id.ToString()),
                 }),
-                NotBefore = DateHelper.GetLocalTime(),
-                Expires = DateHelper.GetLocalTime().AddMinutes(20),
+                Expires = DateTime.Now.AddMinutes(20),
                 SigningCredentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256Signature)
             };
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
@@ -56,7 +57,7 @@ namespace Atm.Autenticador.Api.Helpers
             var handler = new JwtSecurityTokenHandler();
             var token = handler.ReadToken(jwt);
 
-            var valid = DateTime.Compare(token.ValidTo, DateHelper.GetLocalTime().AddMinutes(10));
+            var valid = DateTime.Compare(token.ValidTo, DateTime.Now.AddMinutes(10));
 
             if (valid < 0)
                 return false;
